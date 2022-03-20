@@ -1,9 +1,10 @@
 package com.EspaceRecrutement.metier;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +13,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 public class Personne implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7950217207447904668L;
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	 private String cin;
 	private String nom;
@@ -27,8 +34,10 @@ public class Personne implements Serializable{
 	private String login;
 	 private String password;
 	 private boolean actived;
-	 
-	public Personne(String cin, String nom, String prenom, int age, String email, String numeroTelephone,
+	 @ManyToMany(fetch =FetchType.EAGER )
+	 private Set<Role> roles = new HashSet<>();
+	
+/*	public Personne(String cin, String nom, String prenom, int age, String email, String numeroTelephone,
 			String etatCivil, String login, String password, boolean actived) {
 		super();
 		this.cin = cin;
@@ -41,11 +50,36 @@ public class Personne implements Serializable{
 		this.login = login;
 		this.password = password;
 		this.actived = actived;
-	}
+	}*/
 	public Personne() {
 		super();
 	}
-	public Long getId() {
+	
+
+	public Personne(String login, String email, String password) {
+		super();
+		
+		this.login = login;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public Personne(String login, String password) {
+		this.login = login;
+		this.password = password;// TODO Auto-generated constructor stub
+	}
+
+
+	
+
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+		public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {

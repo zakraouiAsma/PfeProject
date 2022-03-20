@@ -19,6 +19,13 @@ class HeaderComponents extends Component {
                         <div><a href='http://localhost:3000/addPersonnes' className='navbar-brand' >Add</a>
 
                         </div>
+
+                        <div><a href='http://localhost:3000/signUp' className='navbar-brand' >Register </a>
+
+                        </div>
+                        <div><a href='http://localhost:3000/signIn' className='navbar-brand' >Sign In</a>
+
+                        </div>
                     </nav>
                 </header>
             </div>
